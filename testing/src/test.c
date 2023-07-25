@@ -3,7 +3,7 @@
 int main(void)
 {
     int i = 10;
-
+    printf("something \c");
     printf("The value of i is %d\n", i);
     printf("And its address is %p\n", (void *)&i);
 
