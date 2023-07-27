@@ -2,11 +2,10 @@
 
 int main(void)
 {
-    int i = 10;
-    printf("something \c");
-    printf("The value of i is %d\n", i);
-    printf("And its address is %p\n", (void *)&i);
-
-    // %p expects the argument to be a pointer to void
-    // so we cast it to make the compiler happy.
+    int c;
+    printf("testing EOF it is %d\n", EOF);
+    while ((c = getchar()) != EOF) 
+        putchar(c);
+    if ((c = getchar()) == EOF)
+        printf("int size is %lu\n", sizeof(long));
 }
