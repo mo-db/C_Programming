@@ -5,5 +5,7 @@ set -xe
 CFLAGS=""
 LIBS=""
 
-FILE="1-8_countStuff"
+FILE="1-9_replaceBlanks"
 gcc $CFLAGS -o ./output/$FILE ./src/$FILE.c
+
+"./output/$FILE"
