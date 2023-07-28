@@ -8,4 +8,4 @@ int main(void)
         putchar(c);
     if ((c = getchar()) == EOF)
         printf("int size is %lu\n", sizeof(long));
-}
+}    zs
