@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define MAXLINE 1000
 
-int getline();
+int getline(char );
 void copy();
 
 /* print longest input line */
