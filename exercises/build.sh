@@ -5,7 +5,7 @@ set -xe
 CFLAGS=""
 LIBS=""
 
-FILE="1-15_temp_with_function"
+FILE="1-16-1_print_longest_line"
 gcc $CFLAGS -o ./output/$FILE ./src/$FILE.c
 
 "./output/$FILE"
