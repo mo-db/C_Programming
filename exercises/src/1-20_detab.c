@@ -4,7 +4,7 @@
 */
 
 # include <stdio.h>
-# define TAB_SIZE 5
+# define TAB_SIZE 8
 
 int main(void)
 {

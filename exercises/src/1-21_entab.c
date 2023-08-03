@@ -1,32 +1,34 @@
 /*
- * 
- *
- * 
+Replace strings of blanks by the minimum number of 
+tabs and blanks possible.
+
+- Tabstop every 8 position
+
 */
 
 # include <stdio.h>
-# define TAB_SIZE 5
+# define TAB_SIZE 8
 
 int main(void)
 {
-    printf("----|----|----|----|----|----|----|----|\n");
-    int c, n_blanks, pos = 1;
+    int c, pos, blank_len, n_tabs, n_blanks;
+
+
+    n_tabs = blank_len / TAB_SIZE;
+    n_blanks = blank_len % TAB_SIZE;
+    printf("TABS: %d\n", n_tabs);
+    printf("BLANKS: %d\n", n_blanks);
+
+
+    pos = 1;
     while ((c = getchar()) != EOF) {
-        if (c == '\t') {
-            //printf("Bevore Tab: %d ", pos);
-            // printf("pos test 1 = %d", pos);
-            n_blanks = (1 + TAB_SIZE) - (pos % TAB_SIZE);
-            int i;
-            for (i = 0; i < n_blanks; ++i) {
-                putchar(' ');
-                ++pos;
-            }
-            //printf("Pos: %d, Blanks: %d\n", pos, n_blanks);
-        } else if (c == '\n'){
-            putchar(c);
-            pos = 0;
+        if (c == ' ') {
+            ++blank_len;
+            ++pos;
         } else {
-            putchar(c);
+            n_tabs = blank_len / TAB_SIZE;
+            n_blanks = blank_len % TAB_SIZE;
+            blank_len = 0;
             ++pos;
         }
     }
