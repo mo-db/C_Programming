@@ -13,7 +13,6 @@ int main(void)
 {
     int c, pos, blank_len, n_tabs, n_blanks;
 
-
     n_tabs = blank_len / TAB_SIZE;
     n_blanks = blank_len % TAB_SIZE;
     printf("TABS: %d\n", n_tabs);

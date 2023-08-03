@@ -5,7 +5,7 @@ set -xe
 CFLAGS=""
 LIBS=""
 
-FILE="1-21_entab"
+FILE="2-1_count_ranges"
 gcc $CFLAGS -o ./output/$FILE ./src/$FILE.c
 
 "./output/$FILE"
