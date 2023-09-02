@@ -11,7 +11,5 @@ tabs and blanks possible.
 
 int main(void)
 {
-
-    printf("%lu", ULONG_MAX);
-
+    printf("%d\n", ('0'));
 }
