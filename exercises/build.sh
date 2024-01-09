@@ -6,7 +6,7 @@ CFLAGS=""
 LIBS=""
 
 #FILE="2-2_ok_loop"
-FILE=testing
+FILE="5-1_getint"
 
 gcc $CFLAGS -o ./output/$FILE ./src/$FILE.c
 
