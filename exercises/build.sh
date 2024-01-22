@@ -6,9 +6,9 @@ CFLAGS=""
 LIBS=""
 
 #FILE="2-2_ok_loop"
-FILE="4-3_calculator"
-LIB="io"
+FILE="3-3_expand"
+#LIB="io"
 
-gcc $CFLAGS -o ./output/$FILE ./src/$FILE.c ./src/$LIB.c
+gcc $CFLAGS -o ./output/$FILE ./src/$FILE.c #./src/$LIB.c
 
 "./output/$FILE"
