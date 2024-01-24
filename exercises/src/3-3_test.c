@@ -6,13 +6,14 @@
 
 int main()
 {
-    int i = 0;
-    char c;
-    char char_ary[] = "test";
+    int n = 327;
+    int res = 0;
 
-    while ((c = char_ary[i++]) != '\0') {
-        printf("Char: %c\n", c);
-    }
-    
+    res = n % 10;
+    printf("%i\n", res);
+
+    res = n / 10;
+    printf("%i\n", res);
+
     return 0;
 }
