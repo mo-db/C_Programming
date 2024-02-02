@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <ctype.h>
 
+
 int main()
 {
     int value;
