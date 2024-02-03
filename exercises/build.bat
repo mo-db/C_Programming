@@ -2,7 +2,7 @@
 
 SET "CFLAGS="
 SET "LIBS="
-SET "FILE=4-3_calculator"
+SET "FILE=4-2_atof-extended"
 
 gcc %CFLAGS% -o output\%FILE% src\%FILE%.c
 
