@@ -1,8 +1,10 @@
 # Algorithms
 - BFS/DFS, merge/quick sort and binary search, Dijkstra
 
+
 # Data structures
 - hashmaps, stack/queues, linked list and binary trees
+
 
 # Structure
 1. Preprocessor Stuff (starts with #)
@@ -11,3 +13,8 @@
 4. Function Definitions
 5. Statements & Expressions
 6. Comments
+
+
+# Debugging
+- create breakpoints: 
+raise(SIGABRT);  /* To continue from here in GDB: "signal 0". */
