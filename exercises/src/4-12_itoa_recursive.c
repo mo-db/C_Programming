@@ -12,12 +12,12 @@ int sign;
 // recursively convert integer to string 
 int main()
 {
-    int number = 188;
+    int number = -188;
     sign = (number < 0) ? -1 : 1;
     number *= sign;
 
     int string_size = get_array_size(number);
-    char string[3]; // need to use malloc if i want to use string_size var
+    char string[1000]; // need to use malloc if i want to use string_size var
 
     atof_recursive(string, number);
     
