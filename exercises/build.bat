@@ -2,7 +2,7 @@
 
 SET "CFLAGS="
 SET "LIBS="
-SET "FILE=4-2_atof-extended"
+SET "FILE=4-12_itoa_recursive"
 
 gcc %CFLAGS% -o output\%FILE% src\%FILE%.c
 
