@@ -1,9 +1,9 @@
 @echo off
 
-SET "CFLAGS="
+SET "CFLAGS=-g"
 SET "LIBS="
-SET "FILE=4-13_reverse_recursive"
+SET "FILE=5-0_pointer"
 
-gcc %CFLAGS% -o output\%FILE% src\%FILE%.c
+gcc %CFLAGS% src\%FILE%.c -o output\%FILE% 
 
 output\%FILE%.exe
