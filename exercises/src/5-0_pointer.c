@@ -1,12 +1,14 @@
 #include <stdio.h>
 
-void test_func(int *);
+
+int strcmp_ary(char [],  char []);
+int strcmp_ptr(char *, char *);
+
 
 int main()
 {
     int test[3] = {8, 3, 9};
     for (int i = 0; i < 3; i++) {
-        test_func(&test[i]);
         printf("%i ", test[i]);
     }
     
@@ -14,7 +16,21 @@ int main()
     return 0;
 }
 
-void test_func(int *test_val)
+
+int strcmp_ary(char s[], char t[])
 {
-    *test_val += 3;
+    int i;
+
+    for (i = 0; s[i] == t[i]; i++) {
+        if (s[i] == '0') {
+            return 0;
+        }
+    }
+    return s[i] - t[i];
+}
+
+
+int strcmp_ptr(char *s, char *t)
+{
+
 }
