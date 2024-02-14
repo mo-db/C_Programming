@@ -9,6 +9,6 @@ LIBS=""
 FILE="4-12_0_qsort"
 #LIB="io"
 
-gcc $CFLAGS -o ./output/$FILE ./src/$FILE.c #./src/$LIB.c
+clang $CFLAGS -o ./output/$FILE ./src/$FILE.c
 
 "./output/$FILE"
