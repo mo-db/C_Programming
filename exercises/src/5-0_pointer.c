@@ -32,5 +32,5 @@ int strcmp_ary(char s[], char t[])
 
 int strcmp_ptr(char *s, char *t)
 {
-
+    return 0;
 }
