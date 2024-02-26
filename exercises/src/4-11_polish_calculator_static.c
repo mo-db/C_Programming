@@ -180,6 +180,7 @@ int get_char(void)
     return (buffer_position > 0) ? buffer[--buffer_position] : getchar();
 }
 
+/*
 void unget_char(int c)
 {
     if (buffer_position >= BUFFER_SIZE) {
@@ -188,3 +189,4 @@ void unget_char(int c)
         buffer[buffer_position++] = c;
     }
 }
+*/
