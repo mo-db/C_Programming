@@ -1,16 +1,25 @@
+#include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-int main(void)
+// first iteration
+void qs_01(int *, int);
+
+
+int main()
 {
-    char test[] = "blabla";
-    char t1[] = "lu";
-    char t2[] = "ha";
-    char * t_ptr[2];
-    t_ptr[0] = t1;
-    t_ptr[1] = t2;
-
-    printf("%s\n", t_ptr[1]);
+    int values[] = { 8, 19, 7, 2, 11, 1, 5, 16, INT16_MAX };
+    int high = 0;
+    while (values[high] != INT16_MAX) {
+        high++;
+    }
+    qs_01((values+4), high);
 
     return 0;
+}
+
+
+void qs_01(int *values, int high)
+{
+    printf("%d", values[4]);
 }

@@ -1,20 +1,21 @@
 #include <stdint.h>
 #include <stdio.h>
-#include <string.h>
 
-// first iteration
+
 void qs_01(int *, int);
 void swap_01(int *, int *);
 
 
 int main()
 {
-    int values[] = { 8, 19, 7, 2, 11, 1, 5, 16, INT16_MAX };
-    int length = 0;
-    while (values[length] != INT16_MAX) {
-        length++;
+    int values[] = { 8, 19, 7, 88, -14, 82, 2, 11, 1, 5, 16, INT16_MAX };
+    int high = 0;
+    while (values[high] != INT16_MAX) {
+        high++;
     }
-    qs_01(values, length);
+    qs_01(values, high);
+
+    printf("Sorted Array: ");
     for (int i = 0; values[i] != INT16_MAX; i++) {
         printf("%d ", values[i]);
     }
@@ -22,13 +23,12 @@ int main()
 }
 
 
-void qs_01(int *values, int length)
+void qs_01(int *values, int high)
 {
-    int i, j;
-    i= 0;
-    j = length;
+    int i = 0;
+    int j = high;
 
-    if (length < 2) {
+    if (i >= j) {
         return;
     }
 
@@ -41,21 +41,13 @@ void qs_01(int *values, int length)
         } while (values[j] > *values);
         if (i < j) {
             swap_01(&values[i], &values[j]);
-        } else {
-            swap_01(values, &values[j]);
         }
-    }
 
-    qs_01(values, j-1);
-    qs_01((values+j+1), (length-j)-1);
-    if (j > 0) {
-        //qs_01(values, j-1);
     }
-    
-    if (length-j > 0) {
-        //qs_01((values+j+1), (length-j)-1);
-    }
-    
+    swap_01(values, &values[j]);
+
+    qs_01(values, j);
+    qs_01((values+j+1), (high-j-1));  
 }
 
 
