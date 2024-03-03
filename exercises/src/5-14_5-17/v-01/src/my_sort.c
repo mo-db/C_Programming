@@ -1,38 +1,60 @@
+#include <stdint.h>
 #include <stdio.h>
 
-#define MAX_LINES 5
+void qs_01(int *, int);
+void swap_01(int *, int *);
 
-void my_qsort(void *[]);
-int comp_descending(int);
-int comp_ascending(int);
-void my_swap(int *, int *);
-
-char *lineptr[MAX_LINES];
-
-int main(int argc, char * argv[])
+int main()
 {
-    int sample_ary[] = { 4, 8};
-    my_qsort((void **)lineptr);
+    int values[] = { 8, 19, 7, 88, -14, 82, 2, 11, 1, 5, 16, INT16_MAX };
+    int high = 0;
+    void *test;
+    test = values;
+    while (values[high] != INT16_MAX) {
+        high++;
+    }
+    qs_01(test, high);
+
+    printf("Sorted Array: ");
+    for (int i = 0; values[i] != INT16_MAX; i++) {
+        printf("%d ", values[i]);
+    }
     return 0;
 }
 
-void my_qsort(char *sample_ary[])
+
+void qs_01(int *values, int high)
 {
-    if (0) {
-        comp_ascending(1);
-    } else {
-        comp_descending(1);
+    int i = 0;
+    int j = high;
+
+    if (i >= j) {
+        return;
     }
+
+    while (i < j) {
+        do {
+            i++;
+        } while (values[i] < *values);
+        do {
+            j--;
+        } while (values[j] > *values);
+        if (i < j) {
+            swap_01(&values[i], &values[j]);
+        }
+
+    }
+    swap_01(values, &values[j]);
+
+    qs_01(values, j);
+    qs_01((values+j+1), (high-j-1));  
 }
 
-int comp_ascending(int v1)
+
+void swap_01(int *v1, int *v2) 
 {
-    printf("asc");
-    return 1;
+    int temp = *v1;
+    *v1 = *v2;
+    *v2 = temp;
 }
 
-int comp_descending(int v1)
-{
-    printf("desc");
-    return 1;
-}
