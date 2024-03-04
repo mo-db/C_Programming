@@ -37,7 +37,7 @@ int main(int argc, char * argv[])
 {
     int x = 2;
     int y = 4;
-    int my_result = my_operation(&my_mult, x, y);
+    int my_result = my_operation(my_mult, x, y);
     printf("result: %d\n", my_result);
     return 0;
 }
