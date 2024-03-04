@@ -1,6 +1,9 @@
 #include <stdint.h>
 #include <stdio.h>
 
+//https://en.cppreference.com/w/c/error/errno
+//https://www.youtube.com/watch?v=xedk5KXg0VI
+
 #define ALLOC_SIZE 10000
 #define MAX_LINES 100
 
