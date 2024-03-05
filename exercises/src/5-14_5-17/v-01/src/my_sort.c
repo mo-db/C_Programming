@@ -42,6 +42,7 @@ int main()
     }
     qs_01(test, high);
     printf("test");
+    printf("tut");
     //test
 
     /*
