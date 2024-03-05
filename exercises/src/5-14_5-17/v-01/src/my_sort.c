@@ -41,6 +41,7 @@ int main()
         high++;
     }
     qs_01(test, high);
+    printf("test"):
 
     /*
     printf("Sorted Array: ");
