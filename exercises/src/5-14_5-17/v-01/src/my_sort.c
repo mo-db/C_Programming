@@ -7,25 +7,30 @@
 #define ALLOC_SIZE 10000
 #define MAX_LINES 100
 
-char *line_ptr[MAX_LINES];
 char alloc_buffer[ALLOC_SIZE];
-char *alloc_pos = alloc_buffer;
+char *line_ptr[MAX_LINES];
 
 int file_contetn_to_line_buffer(const char *);
-
-char * alloc();
-
 void qs_01(int *, int);
 void swap_01(int *, int *);
 
+
 int main()
 {
+    
     const char *file_name = 
-    "C:/Users/moritz/Documents/Repos/C_Programming/"
-    "exercises/src/5-14_5-17/v-01/input01.txt";
+    //"C:/Users/moritz/Documents/Repos/C_Programming/"
+    //"exercises/src/5-14_5-17/v-01/input01.txt";
+    "/Users/moritz/Repos/C_Prog/C_Programming/exercises/src/5-14_5-17/v-01/input01.txt";
 
-    if (!file_contetn_to_line_buffer(file_name)) {
+    int n_lines = file_contetn_to_line_buffer(file_name);
+    if (!n_lines) {
         return 1;
+    }
+
+    printf("Buffer: ");
+    for (int i = 0; i < n_lines; i++) {
+        puts(line_ptr[i]);
     }
 
     int values[] = { 8, 19, 7, 88, -14, 82, 2, 11, 1, 5, 16, INT16_MAX };
@@ -37,10 +42,12 @@ int main()
     }
     qs_01(test, high);
 
+    /*
     printf("Sorted Array: ");
     for (int i = 0; values[i] != INT16_MAX; i++) {
         printf("%d ", values[i]);
     }
+    */
     return 0;
 }
 
@@ -56,8 +63,24 @@ int file_contetn_to_line_buffer(const char * file_name)
         return 0;
     }
 
+    char c;
+    int n_lines = 0;
+    char *alloc_pos, *old_alloc_pos;
+    alloc_pos = old_alloc_pos = alloc_buffer;
+    while ((c = fgetc(input_file)) != EOF) {
+        if (c == '\n') {
+            *alloc_pos++ = '\0';
+            line_ptr[n_lines++] = old_alloc_pos;
+            old_alloc_pos = alloc_pos;
+        } else if (c == EOF) {
+            *alloc_pos = '\0';
+            break;
+        }
+        *alloc_pos++ = c;
+    }
+
     fclose(input_file);
-    return 1;
+    return n_lines;
 }
 
 
@@ -94,11 +117,4 @@ void swap_01(int *v1, int *v2)
     int temp = *v1;
     *v1 = *v2;
     *v2 = temp;
-}
-
-
-char * alloc()
-{
-    char *foo = NULL;
-    return foo;
 }
