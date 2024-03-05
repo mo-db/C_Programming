@@ -1,5 +1,8 @@
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 //https://en.cppreference.com/w/c/error/errno
 //https://www.youtube.com/watch?v=xedk5KXg0VI
@@ -11,11 +14,16 @@ char alloc_buffer[ALLOC_SIZE];
 char *line_ptr[MAX_LINES];
 
 int file_contetn_to_line_buffer(const char *);
-void qs_01(int *, int);
-void swap_01(int *, int *);
+
+typedef int cmp_func(void *, void *);
+void line_qsort(char *[], int, int, int, cmp_func *cmp);
+void swap_01(char *, char *);
+
+int cmp_lexico(void *, void *);
+int cmp_numeric(void *, void *);
 
 
-int main()
+int main(int argc, char *argv[])
 {
     const char *file_name = 
     //"C:/Users/moritz/Documents/Repos/C_Programming/"
@@ -26,28 +34,8 @@ int main()
     if (!n_lines) {
         return 1;
     }
+    line_qsort(line_ptr, 0, n_lines, 2, cmp_lexico);
 
-    printf("Buffer: \n\n");
-    printf("%d\n", n_lines);
-    for (int i = 0; i <= n_lines; i++) {
-        printf("%s\n", line_ptr[i]);
-    }
-
-    int values[] = { 8, 19, 7, 88, -14, 82, 2, 11, 1, 5, 16, INT16_MAX };
-    int high = 0;
-    void *test;
-    test = values;
-    while (values[high] != INT16_MAX) {
-        high++;
-    }
-    qs_01(test, high);
-
-    /*
-    printf("Sorted Array: ");
-    for (int i = 0; values[i] != INT16_MAX; i++) {
-        printf("%d ", values[i]);
-    }
-    */
     return 0;
 }
 
@@ -86,7 +74,7 @@ int file_contetn_to_line_buffer(const char * file_name)
 }
 
 
-void qs_01(int *values, int high)
+void line_qsort(char **lines, int low, int high, int field, cmp_func *cmp)
 {
     int i = 0;
     int j = high;
@@ -98,25 +86,38 @@ void qs_01(int *values, int high)
     while (i < j) {
         do {
             i++;
-        } while (values[i] < *values);
+        } while (cmp(lines[i], *lines));
         do {
             j--;
-        } while (values[j] > *values);
+        } while (!cmp(lines[i], *lines));
         if (i < j) {
-            swap_01(&values[i], &values[j]);
+            swap_01(lines[i], lines[j]);
         }
 
     }
-    swap_01(values, &values[j]);
+    swap_01(*lines, lines[j]);
 
-    qs_01(values, j);
-    qs_01((values+j+1), (high-j-1));  
+    line_qsort(values, j);
+    line_qsort((values+j+1), (high-j-1));  
 }
 
 
-void swap_01(int *v1, int *v2) 
+void swap_01(char *v1, char *v2) 
 {
     int temp = *v1;
     *v1 = *v2;
     *v2 = temp;
+}
+
+int cmp_lexico(void *p1, void *p2)
+{
+    return strcmp((char *)p1, (char *)p2);
+}
+
+int cmp_numeric(void *p1, void *p2)
+{
+    if (atof((char *)p1) < atof((char *)p2)) {
+        return -1;
+    }
+    return 1;
 }
