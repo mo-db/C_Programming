@@ -41,8 +41,12 @@ int main()
         high++;
     }
     qs_01(test, high);
+
     // lwowowowow
-    
+    printf("test");
+    printf("tut");
+    //test
+
     /*
     printf("Sorted Array: ");
     for (int i = 0; values[i] != INT16_MAX; i++) {
