@@ -17,7 +17,6 @@ void swap_01(int *, int *);
 
 int main()
 {
-    
     const char *file_name = 
     //"C:/Users/moritz/Documents/Repos/C_Programming/"
     //"exercises/src/5-14_5-17/v-01/input01.txt";
@@ -28,9 +27,10 @@ int main()
         return 1;
     }
 
-    printf("Buffer: ");
-    for (int i = 0; i < n_lines; i++) {
-        puts(line_ptr[i]);
+    printf("Buffer: \n\n");
+    printf("%d\n", n_lines);
+    for (int i = 0; i <= n_lines; i++) {
+        printf("%s\n", line_ptr[i]);
     }
 
     int values[] = { 8, 19, 7, 88, -14, 82, 2, 11, 1, 5, 16, INT16_MAX };
@@ -67,13 +67,15 @@ int file_contetn_to_line_buffer(const char * file_name)
     int n_lines = 0;
     char *alloc_pos, *old_alloc_pos;
     alloc_pos = old_alloc_pos = alloc_buffer;
-    while ((c = fgetc(input_file)) != EOF) {
+    while ((c = fgetc(input_file))) {
         if (c == '\n') {
             *alloc_pos++ = '\0';
             line_ptr[n_lines++] = old_alloc_pos;
             old_alloc_pos = alloc_pos;
+            continue;
         } else if (c == EOF) {
             *alloc_pos = '\0';
+            line_ptr[n_lines] = old_alloc_pos;
             break;
         }
         *alloc_pos++ = c;
