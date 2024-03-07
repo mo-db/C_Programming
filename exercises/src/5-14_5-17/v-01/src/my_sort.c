@@ -98,21 +98,23 @@ void line_qsort(char **lines, int high, int field, cmp_func *cmp)
         } while (cmp(lines[j], *lines, field) > 0);
         if (i < j) {
             swap_01(lines[i], lines[j]);
+            lines[i] = lines[j];
         }
 
     }
     swap_01(*lines, lines[j]);
+    lines[0] = lines[j];
 
     line_qsort(lines, j, field, cmp);
     line_qsort((lines+j+1), (high-j-1), field, cmp);  
 }
 
 
-void swap_01(char *v1, char *v2) 
+void swap_01(char *line1, char *line2) 
 {
-    int temp = *v1;
-    *v1 = *v2;
-    *v2 = temp;
+    char * temp = line1;
+    line1 = line2;
+    line2 = temp;
 }
 
 int cmp_lexico(void *p1, void *p2, int field)
