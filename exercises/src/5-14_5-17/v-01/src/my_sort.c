@@ -15,12 +15,13 @@ char *line_ptr[MAX_LINES];
 
 int file_contetn_to_line_buffer(const char *);
 
-typedef int cmp_func(void *, void *);
-void line_qsort(char *[], int, int, int, cmp_func *cmp);
+typedef int cmp_func(void *, void *, int);
+void line_qsort(char *[], int, int, cmp_func *cmp);
 void swap_01(char *, char *);
 
-int cmp_lexico(void *, void *);
-int cmp_numeric(void *, void *);
+int cmp_lexico(void *, void *, int);
+int cmp_numeric(void *, void *, int);
+char * select_field(char *, int);
 
 
 int main(int argc, char *argv[])
@@ -34,7 +35,12 @@ int main(int argc, char *argv[])
     if (!n_lines) {
         return 1;
     }
-    line_qsort(line_ptr, 0, n_lines, 2, cmp_lexico);
+    line_qsort(line_ptr, n_lines, 2, cmp_lexico);
+
+    printf("Sorted: \n");
+    for (int i = 0; i <= n_lines; i++) {
+        printf("%s \n", line_ptr[i]);
+    }
 
     return 0;
 }
@@ -74,7 +80,7 @@ int file_contetn_to_line_buffer(const char * file_name)
 }
 
 
-void line_qsort(char **lines, int low, int high, int field, cmp_func *cmp)
+void line_qsort(char **lines, int high, int field, cmp_func *cmp)
 {
     int i = 0;
     int j = high;
@@ -86,10 +92,10 @@ void line_qsort(char **lines, int low, int high, int field, cmp_func *cmp)
     while (i < j) {
         do {
             i++;
-        } while (cmp(lines[i], *lines));
+        } while (cmp(lines[i], *lines, field) <= 0);
         do {
             j--;
-        } while (!cmp(lines[i], *lines));
+        } while (cmp(lines[j], *lines, field) > 0);
         if (i < j) {
             swap_01(lines[i], lines[j]);
         }
@@ -97,8 +103,8 @@ void line_qsort(char **lines, int low, int high, int field, cmp_func *cmp)
     }
     swap_01(*lines, lines[j]);
 
-    line_qsort(values, j);
-    line_qsort((values+j+1), (high-j-1));  
+    line_qsort(lines, j, field, cmp);
+    line_qsort((lines+j+1), (high-j-1), field, cmp);  
 }
 
 
@@ -109,15 +115,26 @@ void swap_01(char *v1, char *v2)
     *v2 = temp;
 }
 
-int cmp_lexico(void *p1, void *p2)
+int cmp_lexico(void *p1, void *p2, int field)
 {
-    return strcmp((char *)p1, (char *)p2);
+    return strcmp(select_field((char *)p1, field), select_field((char *)p2, field));
 }
 
-int cmp_numeric(void *p1, void *p2)
+int cmp_numeric(void *p1, void *p2, int field)
 {
-    if (atof((char *)p1) < atof((char *)p2)) {
-        return -1;
+    return (atof(select_field((char *) p1, field)) 
+            < atof(select_field((char *) p2, field))) ? -1 : 1;
+}
+
+char * select_field(char * line, int field)
+{
+    char field_seperator = ' ';
+    char * ptr = line;
+    int n_blanks = 0;
+    while (n_blanks < (field - 1)) {
+        if (*ptr++ == field_seperator) {
+            n_blanks++;
+        }
     }
-    return 1;
+    return ptr;
 }
