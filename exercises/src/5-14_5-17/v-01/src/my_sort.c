@@ -17,7 +17,9 @@ int file_contetn_to_line_buffer(const char *);
 
 typedef int cmp_func(void *, void *, int);
 void line_qsort(char *[], int, int, cmp_func *cmp);
-void swap_01(char *, char *);
+void swap_01(char **, char **);
+void swap_02(char *[], int, int);
+
 
 int cmp_lexico(void *, void *, int);
 int cmp_numeric(void *, void *, int);
@@ -97,25 +99,34 @@ void line_qsort(char **lines, int high, int field, cmp_func *cmp)
             j--;
         } while (cmp(lines[j], *lines, field) > 0);
         if (i < j) {
-            swap_01(lines[i], lines[j]);
-            lines[i] = lines[j];
+            swap_01(&lines[i], &lines[j]);
+            //swap_02(lines, i, j);
         }
 
     }
-    swap_01(*lines, lines[j]);
-    lines[0] = lines[j];
+    swap_01(&lines[0], &lines[j]);
+    //swap_02(lines, 0, j);
 
     line_qsort(lines, j, field, cmp);
     line_qsort((lines+j+1), (high-j-1), field, cmp);  
 }
 
 
-void swap_01(char *line1, char *line2) 
+void swap_01(char **line1, char **line2) 
 {
-    char * temp = line1;
-    line1 = line2;
-    line2 = temp;
+    char *temp = *line1;
+    *line1 = *line2;
+    *line2 = temp;
 }
+
+
+void swap_02(char *lines[], int i, int j) 
+{
+    char *temp = *(lines+i);
+    lines[i] = lines[j];
+    lines[j] = temp;
+}
+
 
 int cmp_lexico(void *p1, void *p2, int field)
 {
