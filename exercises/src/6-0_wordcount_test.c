@@ -25,6 +25,12 @@ typedef struct
 
 typedef struct
 {
+    point p8;
+    point p9;
+} rect;
+
+typedef struct
+{
     int test_ary[2];
 } data;
 
@@ -33,9 +39,38 @@ void print_student(student s)
     printf("Age: %d\n", s.age);
 }
 
+struct spaceship
+{
+    char* model;
+    int max_speed;
+} ship = {"T-65 X-wing starfighter", 1050},
+    *pship = &ship;
+
+point sfunc()
+{
+    point p5;
+    p5.x = 1;
+    p5.y = 4;
+    return  p5;
+}
+
 // Counts the occurences of c keywords in given input stream
 int main()
 {
+    char **pmodel = (char**)pship;
+    printf("Model: %s", *pmodel);
+
+    point p6;
+    point *p_ptr = &p6;
+    int x1 = (*p_ptr).x;
+    int x2 = p_ptr->x;
+
+    rect r1;
+    rect *rp = &r1;
+
+    int x8 = r1.p8.x;
+    int x11 = rp->p8.x;
+
     student karl;
     karl.age = 26;
     print_student(karl);
