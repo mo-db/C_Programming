@@ -1,0 +1,2 @@
+-I/usr/local/lib/raylib-5.0_macos/include/
+-I/usr/local/lib/SDL2-2.30.1/include/
