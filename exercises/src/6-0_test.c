@@ -58,7 +58,9 @@ point sfunc()
 int main()
 {
     char **pmodel = (char**)pship;
-    printf("Model: %s", *pmodel);
+    printf("Model: %s\n", *pmodel);
+    printf("... %s\n", (*pship).model);
+    printf("... %s\n", pship->model);
 
     point p6;
     point *p_ptr = &p6;

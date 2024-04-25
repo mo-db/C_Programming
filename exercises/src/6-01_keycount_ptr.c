@@ -19,15 +19,16 @@ int bin_search(char *, struct key *, int);
 
 int main()
 {
-    FILE *input_file = fopen("/Users/moritz/Repos/C_Prog/C_Programming/exercises/src/testfile.txt", "r");
+    struct key *p;
+    FILE *input_file = fopen("/Users/moritz/Repos/C_Programming/exercises/src/testfile.txt", "r");
     if (input_file == NULL) {
         printf("ERROR: file opening failed!\n");
+        return 1;
     }
 
     int n_keys = sizeof(keytab) / sizeof(*keytab);
     char word[WORD_MAXLEN];
     while (get_word(word, input_file, WORD_MAXLEN) != EOF) {
-        //printf("%s\n", word);
         int match_position = bin_search(word, keytab, n_keys);
         if (match_position > 0) {
             (keytab[match_position].count)++;
