@@ -21,6 +21,7 @@ typedef struct
 {
     int x;
     int y;
+    int z;
 } point;
 
 typedef struct
@@ -54,15 +55,29 @@ point sfunc()
     return  p5;
 }
 
+void func(point *pp) 
+{
+    pp->x = 9;
+    printf("func: %d\n", pp->x);
+}
+
 // Counts the occurences of c keywords in given input stream
 int main()
 {
     char **pmodel = (char**)pship;
-    printf("Model: %s\n", *pmodel);
-    printf("... %s\n", (*pship).model);
-    printf("... %s\n", pship->model);
+    //printf("Model: %s\n", *pmodel);
+    //printf("... %s\n", (*pship).model);
+    //printf("... %s\n", pship->model);
 
     point p6;
+    p6.x = 3;
+    func(&p6);
+    printf("after func: %d\n", p6.x);
+    printf("sizeof: %ld\n", sizeof(p6));
+
+
+
+
     point *p_ptr = &p6;
     int x1 = (*p_ptr).x;
     int x2 = p_ptr->x;
@@ -113,7 +128,7 @@ int main()
     x.test_ary[1] = 7;
 
     for (int i = 0; i < 2; i++) {
-        printf("Array: %d\n", x.test_ary[i]);
+        //printf("Array: %d\n", x.test_ary[i]);
     }
 
     return 0;
