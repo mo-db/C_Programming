@@ -25,7 +25,7 @@ int insert_node_alpha(tnode **, char*);
 void print_tree(tnode *);
 
 void tree_get_size(tnode *, int *);
-tnode *create_word_ary(word_count *, int size);
+tnode *create_word_ary(word_count *);
 void word_ary_qsort();
 
 
@@ -52,14 +52,9 @@ int main(int argc, char *argv[])
     }
     print_tree(root_p);
 
-    int size_counter = 0;
-    tree_get_size(root_p, &size_counter);
+    //int size_counter = 0;
+    //tree_get_size(root_p, &size_counter);
     //printf("%d\n", size_counter);
-
-    
-    typedef struct test {
-        int i;
-    } test;
 
 
     if (input_status == 2) {
@@ -212,16 +207,10 @@ void print_tree(tnode *root_p)
 void tree_get_size(tnode *root_p, int *counter)
 {
     if (root_p->left != NULL) {
-        tree_get_size(root_p->left, counter);
+        print_tree(root_p->left);
     }
     (*counter)++;
     if (root_p->right != NULL) {
-        tree_get_size(root_p->right, counter);
+        print_tree(root_p->right);
     }
-}
-
-
-tnode *create_word_ary(word_count *wc_ptr, int size)
-{
-    return NULL;
 }
