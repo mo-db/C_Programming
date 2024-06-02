@@ -8,15 +8,15 @@ void swap_01(int *, int *);
 
 int main()
 {
-    int values[] = { 8, 19, 7, 88, -14, 82, 2, 11, 1, 5, 16, INT16_MAX };
-    int high = 0;
-    while (values[high] != INT16_MAX) {
-        high++;
-    }
+    int values[] = { 8, 19, 7, 88, -14, 82, 2, 11, 1, 5, 16 };
+    int high = 11;
+    //while (values[high] != INT16_MAX) {
+    //    high++;
+    //}
     qs_01(values, high);
 
     printf("Sorted Array: ");
-    for (int i = 0; values[i] != INT16_MAX; i++) {
+    for (int i = 0; i < 11; i++) {
         printf("%d ", values[i]);
     }
     return 0;
@@ -28,7 +28,7 @@ void qs_01(int *values, int high)
     int i = 0;
     int j = high;
 
-    if (i >= j) {
+    if (j < 1) {
         return;
     }
 

@@ -25,8 +25,9 @@ int insert_node_alpha(tnode **, char*);
 void print_tree(tnode *);
 
 void tree_get_size(tnode *, int *);
-tnode *create_word_ary(word_count *);
-void word_ary_qsort();
+int create_word_ary(tnode **, tnode *);
+void word_ary_qsort(tnode *, int);
+void wc_swap(int *, int *);
 
 
 int main(int argc, char *argv[])
@@ -52,12 +53,27 @@ int main(int argc, char *argv[])
     }
     print_tree(root_p);
 
-    //int size_counter = 0;
-    //tree_get_size(root_p, &size_counter);
-    //printf("%d\n", size_counter);
 
+    int tree_size = 0;
+    tree_get_size(root_p, &tree_size);
+    tnode *wc_ary = malloc(sizeof(tnode) * tree_size);
+    if (wc_ary == NULL) {
+        printf("<error> wc_ary malloc failed!");
+        return 1;
+    }
 
-    if (input_status == 2) {
+    if (!create_word_ary(&wc_ary, root_p)) { return 1; }
+    for (int i = 0; i < tree_size; i++) {
+        printf("%d\n", wc_ary[i].count);
+    }
+
+    word_ary_qsort(wc_ary, tree_size);
+    for (int i = 0; i < tree_size; i++) {
+        printf("%d - ", wc_ary[i].count);
+        printf("%s\n", wc_ary[i].word);
+    }
+
+     if (input_status == 2) {
         fclose(input_file);
     }
 
@@ -207,10 +223,76 @@ void print_tree(tnode *root_p)
 void tree_get_size(tnode *root_p, int *counter)
 {
     if (root_p->left != NULL) {
-        print_tree(root_p->left);
+        tree_get_size(root_p->left, counter);
     }
     (*counter)++;
     if (root_p->right != NULL) {
-        print_tree(root_p->right);
+        tree_get_size(root_p->right, counter);
     }
 }
+
+
+int create_word_ary(tnode **wc_pp, tnode *root_p)
+{
+    static int i = 0;
+    static int error_indicator = 1;
+
+    if (root_p->left != NULL) {
+        create_word_ary(wc_pp, root_p->left);
+    }
+
+    // executed for each node in tree
+    if (error_indicator != 1) { return error_indicator; }
+
+    tnode *new_wc;
+    new_wc = root_p;
+    //if (i == 2) { new_wc = NULL; }
+    if (new_wc == NULL) {
+        printf("<error> testerror\n");
+        error_indicator = 0;
+        return error_indicator;
+    }
+    (*wc_pp)[i++] = *new_wc;
+
+    if (root_p->right != NULL) {
+        create_word_ary(wc_pp, root_p->right);
+    }
+    return error_indicator;
+}
+
+
+void word_ary_qsort(tnode *wc_ary, int high)
+{
+    int i = 0;
+    int j = high;
+
+    if (j < 1) {
+        return;
+    }
+
+    while (i < j) {
+        do {
+            i++;
+        } while ((wc_ary[i].count < (*wc_ary).count) && i <= high);
+        do {
+            j--;
+        } while ((wc_ary[j].count > (*wc_ary).count) && j > 0);
+        if (i < j) {
+            wc_swap(&(wc_ary[i].count), &(wc_ary[j].count));
+        }
+
+    }
+    wc_swap(&((*wc_ary).count), &(wc_ary[j].count));
+
+    word_ary_qsort(wc_ary, j);
+    word_ary_qsort((wc_ary+j+1), (high-j-1));  
+}
+
+
+void wc_swap(int *v1, int *v2)
+{
+    int temp = *v1;
+    *v1 = *v2;
+    *v2 = temp;
+}
+

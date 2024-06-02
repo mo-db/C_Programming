@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+//testing git signs
+// this is a test
 
 typedef struct tnode {
     char *word;
@@ -23,10 +25,6 @@ int cli_get_word(char *, const int);
 tnode *create_node(char *);
 int insert_node_alpha(tnode **, char*);
 void print_tree(tnode *);
-
-void tree_get_size(tnode *, int *);
-tnode *create_word_ary(word_count *, int size);
-void word_ary_qsort();
 
 
 int main(int argc, char *argv[])
@@ -51,16 +49,6 @@ int main(int argc, char *argv[])
         }
     }
     print_tree(root_p);
-
-    int size_counter = 0;
-    tree_get_size(root_p, &size_counter);
-    //printf("%d\n", size_counter);
-
-    
-    typedef struct test {
-        int i;
-    } test;
-
 
     if (input_status == 2) {
         fclose(input_file);
@@ -206,22 +194,4 @@ void print_tree(tnode *root_p)
     if (root_p->right != NULL) {
         print_tree(root_p->right);
     }
-}
-
-
-void tree_get_size(tnode *root_p, int *counter)
-{
-    if (root_p->left != NULL) {
-        tree_get_size(root_p->left, counter);
-    }
-    (*counter)++;
-    if (root_p->right != NULL) {
-        tree_get_size(root_p->right, counter);
-    }
-}
-
-
-tnode *create_word_ary(word_count *wc_ptr, int size)
-{
-    return NULL;
 }
